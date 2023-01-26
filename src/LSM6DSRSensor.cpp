@@ -36,11 +36,9 @@
  ******************************************************************************
  */
 
-
 /* Includes ------------------------------------------------------------------*/
 
 #include "LSM6DSRSensor.h"
-
 
 /* Class Implementation ------------------------------------------------------*/
 
@@ -80,11 +78,11 @@ LSM6DSRSensor::LSM6DSRSensor(SPIClass *spi, int cs_pin, uint32_t spi_speed) : de
  */
 LSM6DSRStatusTypeDef LSM6DSRSensor::begin()
 {
-  if(dev_spi)
+  if (dev_spi)
   {
     // Configure CS pin
     pinMode(cs_pin, OUTPUT);
-    digitalWrite(cs_pin, HIGH); 
+    digitalWrite(cs_pin, HIGH);
   }
 
   /* Disable I3C */
@@ -141,7 +139,7 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::begin()
   {
     return LSM6DSR_ERROR;
   }
-  
+
   acc_is_enabled = 0;
   gyro_is_enabled = 0;
 
@@ -166,10 +164,10 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::end()
   }
 
   /* Reset CS configuration */
-  if(dev_spi)
+  if (dev_spi)
   {
     // Configure CS pin
-    pinMode(cs_pin, INPUT); 
+    pinMode(cs_pin, INPUT);
   }
 
   return LSM6DSR_OK;
@@ -261,25 +259,25 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_X_Sensitivity(float *Sensitivity)
   /* Store the Sensitivity based on actual full scale. */
   switch (full_scale)
   {
-    case LSM6DSR_2g:
-      *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_2G;
-      break;
+  case LSM6DSR_2g:
+    *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_2G;
+    break;
 
-    case LSM6DSR_4g:
-      *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_4G;
-      break;
+  case LSM6DSR_4g:
+    *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_4G;
+    break;
 
-    case LSM6DSR_8g:
-      *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_8G;
-      break;
+  case LSM6DSR_8g:
+    *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_8G;
+    break;
 
-    case LSM6DSR_16g:
-      *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_16G;
-      break;
+  case LSM6DSR_16g:
+    *Sensitivity = LSM6DSR_ACC_SENSITIVITY_FS_16G;
+    break;
 
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
   return ret;
@@ -303,57 +301,57 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_X_ODR(float *Odr)
 
   switch (odr_low_level)
   {
-    case LSM6DSR_XL_ODR_OFF:
-      *Odr = 0.0f;
-      break;
+  case LSM6DSR_XL_ODR_OFF:
+    *Odr = 0.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_1Hz6:
-      *Odr = 1.6f;
-      break;
+  case LSM6DSR_XL_ODR_1Hz6:
+    *Odr = 1.6f;
+    break;
 
-    case LSM6DSR_XL_ODR_12Hz5:
-      *Odr = 12.5f;
-      break;
+  case LSM6DSR_XL_ODR_12Hz5:
+    *Odr = 12.5f;
+    break;
 
-    case LSM6DSR_XL_ODR_26Hz:
-      *Odr = 26.0f;
-      break;
+  case LSM6DSR_XL_ODR_26Hz:
+    *Odr = 26.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_52Hz:
-      *Odr = 52.0f;
-      break;
+  case LSM6DSR_XL_ODR_52Hz:
+    *Odr = 52.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_104Hz:
-      *Odr = 104.0f;
-      break;
+  case LSM6DSR_XL_ODR_104Hz:
+    *Odr = 104.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_208Hz:
-      *Odr = 208.0f;
-      break;
+  case LSM6DSR_XL_ODR_208Hz:
+    *Odr = 208.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_417Hz:
-      *Odr = 417.0f;
-      break;
+  case LSM6DSR_XL_ODR_417Hz:
+    *Odr = 417.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_833Hz:
-      *Odr = 833.0f;
-      break;
+  case LSM6DSR_XL_ODR_833Hz:
+    *Odr = 833.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_1667Hz:
-      *Odr = 1667.0f;
-      break;
+  case LSM6DSR_XL_ODR_1667Hz:
+    *Odr = 1667.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_3333Hz:
-      *Odr = 3333.0f;
-      break;
+  case LSM6DSR_XL_ODR_3333Hz:
+    *Odr = 3333.0f;
+    break;
 
-    case LSM6DSR_XL_ODR_6667Hz:
-      *Odr = 6667.0f;
-      break;
+  case LSM6DSR_XL_ODR_6667Hz:
+    *Odr = 6667.0f;
+    break;
 
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
   return ret;
@@ -379,67 +377,67 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_X_ODR_With_Mode(float Odr, LSM6DSR_ACC_O
 {
   LSM6DSRStatusTypeDef ret = LSM6DSR_OK;
   float newOdr = Odr;
-  
+
   switch (Mode)
   {
-    case LSM6DSR_ACC_HIGH_PERFORMANCE_MODE:
-    {
-      /* We must uncheck Low Power bit if it is enabled */
-      lsm6dsr_ctrl6_c_t val;
+  case LSM6DSR_ACC_HIGH_PERFORMANCE_MODE:
+  {
+    /* We must uncheck Low Power bit if it is enabled */
+    lsm6dsr_ctrl6_c_t val;
 
-      if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    {
+      return LSM6DSR_ERROR;
+    }
+
+    if (val.xl_hm_mode != 0U)
+    {
+      val.xl_hm_mode = 0U;
+      if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
       {
         return LSM6DSR_ERROR;
       }
-
-      if (val.xl_hm_mode != 0U)
-      {
-        val.xl_hm_mode = 0U;
-        if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
-        {
-          return LSM6DSR_ERROR;
-        }
-      }
-
-      /* ODR should be at least 12.5Hz */
-      if (newOdr < 12.5f)
-      {
-        newOdr = 12.5f;
-      }
-      break;
     }
-    case LSM6DSR_ACC_LOW_POWER_NORMAL_MODE:
-    {
-      /* We must check the Low Power bit if it is unchecked */
-      lsm6dsr_ctrl6_c_t val;
 
-      if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    /* ODR should be at least 12.5Hz */
+    if (newOdr < 12.5f)
+    {
+      newOdr = 12.5f;
+    }
+    break;
+  }
+  case LSM6DSR_ACC_LOW_POWER_NORMAL_MODE:
+  {
+    /* We must check the Low Power bit if it is unchecked */
+    lsm6dsr_ctrl6_c_t val;
+
+    if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    {
+      return LSM6DSR_ERROR;
+    }
+
+    if (val.xl_hm_mode == 0U)
+    {
+      val.xl_hm_mode = 1U;
+      if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
       {
         return LSM6DSR_ERROR;
       }
-
-      if (val.xl_hm_mode == 0U)
-      {
-        val.xl_hm_mode = 1U;
-        if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL6_C, (uint8_t *)&val, 1) != LSM6DSR_OK)
-        {
-          return LSM6DSR_ERROR;
-        }
-      }
-
-      /* Now we need to limit the ODR to 208 Hz if it is higher */
-      if (newOdr > 208.0f)
-      {
-        newOdr = 208.0f;
-      }
-      break;
     }
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+
+    /* Now we need to limit the ODR to 208 Hz if it is higher */
+    if (newOdr > 208.0f)
+    {
+      newOdr = 208.0f;
+    }
+    break;
+  }
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
-  if(ret == LSM6DSR_ERROR)
+  if (ret == LSM6DSR_ERROR)
   {
     return LSM6DSR_ERROR;
   }
@@ -465,17 +463,17 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_X_ODR_When_Enabled(float Odr)
 {
   lsm6dsr_odr_xl_t new_odr;
 
-  new_odr = (Odr <=    1.6f) ? LSM6DSR_XL_ODR_1Hz6
-          : (Odr <=   12.5f) ? LSM6DSR_XL_ODR_12Hz5
-          : (Odr <=   26.0f) ? LSM6DSR_XL_ODR_26Hz
-          : (Odr <=   52.0f) ? LSM6DSR_XL_ODR_52Hz
-          : (Odr <=  104.0f) ? LSM6DSR_XL_ODR_104Hz
-          : (Odr <=  208.0f) ? LSM6DSR_XL_ODR_208Hz
-          : (Odr <=  417.0f) ? LSM6DSR_XL_ODR_417Hz
-          : (Odr <=  833.0f) ? LSM6DSR_XL_ODR_833Hz
-          : (Odr <= 1667.0f) ? LSM6DSR_XL_ODR_1667Hz
-          : (Odr <= 3333.0f) ? LSM6DSR_XL_ODR_3333Hz
-          :                    LSM6DSR_XL_ODR_6667Hz;
+  new_odr = (Odr <= 1.6f)      ? LSM6DSR_XL_ODR_1Hz6
+            : (Odr <= 12.5f)   ? LSM6DSR_XL_ODR_12Hz5
+            : (Odr <= 26.0f)   ? LSM6DSR_XL_ODR_26Hz
+            : (Odr <= 52.0f)   ? LSM6DSR_XL_ODR_52Hz
+            : (Odr <= 104.0f)  ? LSM6DSR_XL_ODR_104Hz
+            : (Odr <= 208.0f)  ? LSM6DSR_XL_ODR_208Hz
+            : (Odr <= 417.0f)  ? LSM6DSR_XL_ODR_417Hz
+            : (Odr <= 833.0f)  ? LSM6DSR_XL_ODR_833Hz
+            : (Odr <= 1667.0f) ? LSM6DSR_XL_ODR_1667Hz
+            : (Odr <= 3333.0f) ? LSM6DSR_XL_ODR_3333Hz
+                               : LSM6DSR_XL_ODR_6667Hz;
 
   /* Output data rate selection. */
   if (lsm6dsr_xl_data_rate_set(&reg_ctx, new_odr) != LSM6DSR_OK)
@@ -493,21 +491,20 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_X_ODR_When_Enabled(float Odr)
  */
 LSM6DSRStatusTypeDef LSM6DSRSensor::Set_X_ODR_When_Disabled(float Odr)
 {
-  acc_odr = (Odr <=    1.6f) ? LSM6DSR_XL_ODR_1Hz6
-          : (Odr <=   12.5f) ? LSM6DSR_XL_ODR_12Hz5
-          : (Odr <=   26.0f) ? LSM6DSR_XL_ODR_26Hz
-          : (Odr <=   52.0f) ? LSM6DSR_XL_ODR_52Hz
-          : (Odr <=  104.0f) ? LSM6DSR_XL_ODR_104Hz
-          : (Odr <=  208.0f) ? LSM6DSR_XL_ODR_208Hz
-          : (Odr <=  417.0f) ? LSM6DSR_XL_ODR_417Hz
-          : (Odr <=  833.0f) ? LSM6DSR_XL_ODR_833Hz
-          : (Odr <= 1667.0f) ? LSM6DSR_XL_ODR_1667Hz
-          : (Odr <= 3333.0f) ? LSM6DSR_XL_ODR_3333Hz
-          :                    LSM6DSR_XL_ODR_6667Hz;
+  acc_odr = (Odr <= 1.6f)      ? LSM6DSR_XL_ODR_1Hz6
+            : (Odr <= 12.5f)   ? LSM6DSR_XL_ODR_12Hz5
+            : (Odr <= 26.0f)   ? LSM6DSR_XL_ODR_26Hz
+            : (Odr <= 52.0f)   ? LSM6DSR_XL_ODR_52Hz
+            : (Odr <= 104.0f)  ? LSM6DSR_XL_ODR_104Hz
+            : (Odr <= 208.0f)  ? LSM6DSR_XL_ODR_208Hz
+            : (Odr <= 417.0f)  ? LSM6DSR_XL_ODR_417Hz
+            : (Odr <= 833.0f)  ? LSM6DSR_XL_ODR_833Hz
+            : (Odr <= 1667.0f) ? LSM6DSR_XL_ODR_1667Hz
+            : (Odr <= 3333.0f) ? LSM6DSR_XL_ODR_3333Hz
+                               : LSM6DSR_XL_ODR_6667Hz;
 
   return LSM6DSR_OK;
 }
-
 
 /**
  * @brief  Get the LSM6DSR accelerometer sensor full scale
@@ -527,25 +524,25 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_X_FS(int32_t *FullScale)
 
   switch (fs_low_level)
   {
-    case LSM6DSR_2g:
-      *FullScale =  2;
-      break;
+  case LSM6DSR_2g:
+    *FullScale = 2;
+    break;
 
-    case LSM6DSR_4g:
-      *FullScale =  4;
-      break;
+  case LSM6DSR_4g:
+    *FullScale = 4;
+    break;
 
-    case LSM6DSR_8g:
-      *FullScale =  8;
-      break;
+  case LSM6DSR_8g:
+    *FullScale = 8;
+    break;
 
-    case LSM6DSR_16g:
-      *FullScale = 16;
-      break;
+  case LSM6DSR_16g:
+    *FullScale = 16;
+    break;
 
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
   return ret;
@@ -562,10 +559,10 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_X_FS(int32_t FullScale)
 
   /* Seems like MISRA C-2012 rule 14.3a violation but only from single file statical analysis point of view because
      the parameter passed to the function is not known at the moment of analysis */
-  new_fs = (FullScale <= 2) ? LSM6DSR_2g
-         : (FullScale <= 4) ? LSM6DSR_4g
-         : (FullScale <= 8) ? LSM6DSR_8g
-         :                    LSM6DSR_16g;
+  new_fs = (FullScale <= 2)   ? LSM6DSR_2g
+           : (FullScale <= 4) ? LSM6DSR_4g
+           : (FullScale <= 8) ? LSM6DSR_8g
+                              : LSM6DSR_16g;
 
   if (lsm6dsr_xl_full_scale_set(&reg_ctx, new_fs) != LSM6DSR_OK)
   {
@@ -598,7 +595,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_X_AxesRaw(int16_t *Value)
   return LSM6DSR_OK;
 }
 
-
 /**
  * @brief  Get the LSM6DSR accelerometer sensor axes
  * @param  Acceleration pointer where the values of the axes are written
@@ -629,7 +625,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_X_Axes(int32_t *Acceleration)
   return LSM6DSR_OK;
 }
 
-
 /**
  * @brief  Get the LSM6DSR ACC data ready bit value
  * @param  Status the status of data ready bit
@@ -644,7 +639,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_X_DRDY_Status(uint8_t *Status)
 
   return LSM6DSR_OK;
 }
-
 
 /**
  * @brief  Enable the LSM6DSR gyroscope sensor
@@ -668,7 +662,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Enable_G()
 
   return LSM6DSR_OK;
 }
-
 
 /**
  * @brief  Disable the LSM6DSR gyroscope sensor
@@ -718,33 +711,33 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_Sensitivity(float *Sensitivity)
   /* Store the sensitivity based on actual full scale. */
   switch (full_scale)
   {
-    case LSM6DSR_125dps:
-      *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_125DPS;
-      break;
+  case LSM6DSR_125dps:
+    *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_125DPS;
+    break;
 
-    case LSM6DSR_250dps:
-      *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_250DPS;
-      break;
+  case LSM6DSR_250dps:
+    *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_250DPS;
+    break;
 
-    case LSM6DSR_500dps:
-      *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_500DPS;
-      break;
+  case LSM6DSR_500dps:
+    *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_500DPS;
+    break;
 
-    case LSM6DSR_1000dps:
-      *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_1000DPS;
-      break;
+  case LSM6DSR_1000dps:
+    *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_1000DPS;
+    break;
 
-    case LSM6DSR_2000dps:
-      *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_2000DPS;
-      break;
+  case LSM6DSR_2000dps:
+    *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_2000DPS;
+    break;
 
-    case LSM6DSR_4000dps:
-      *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_4000DPS;
-      break;
+  case LSM6DSR_4000dps:
+    *Sensitivity = LSM6DSR_GYRO_SENSITIVITY_FS_4000DPS;
+    break;
 
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
   return ret;
@@ -768,53 +761,53 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_ODR(float *Odr)
 
   switch (odr_low_level)
   {
-    case LSM6DSR_GY_ODR_OFF:
-      *Odr = 0.0f;
-      break;
+  case LSM6DSR_GY_ODR_OFF:
+    *Odr = 0.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_12Hz5:
-      *Odr = 12.5f;
-      break;
+  case LSM6DSR_GY_ODR_12Hz5:
+    *Odr = 12.5f;
+    break;
 
-    case LSM6DSR_GY_ODR_26Hz:
-      *Odr = 26.0f;
-      break;
+  case LSM6DSR_GY_ODR_26Hz:
+    *Odr = 26.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_52Hz:
-      *Odr = 52.0f;
-      break;
+  case LSM6DSR_GY_ODR_52Hz:
+    *Odr = 52.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_104Hz:
-      *Odr = 104.0f;
-      break;
+  case LSM6DSR_GY_ODR_104Hz:
+    *Odr = 104.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_208Hz:
-      *Odr = 208.0f;
-      break;
+  case LSM6DSR_GY_ODR_208Hz:
+    *Odr = 208.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_417Hz:
-      *Odr = 417.0f;
-      break;
+  case LSM6DSR_GY_ODR_417Hz:
+    *Odr = 417.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_833Hz:
-      *Odr = 833.0f;
-      break;
+  case LSM6DSR_GY_ODR_833Hz:
+    *Odr = 833.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_1667Hz:
-      *Odr =  1667.0f;
-      break;
+  case LSM6DSR_GY_ODR_1667Hz:
+    *Odr = 1667.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_3333Hz:
-      *Odr =  3333.0f;
-      break;
+  case LSM6DSR_GY_ODR_3333Hz:
+    *Odr = 3333.0f;
+    break;
 
-    case LSM6DSR_GY_ODR_6667Hz:
-      *Odr =  6667.0f;
-      break;
+  case LSM6DSR_GY_ODR_6667Hz:
+    *Odr = 6667.0f;
+    break;
 
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
   return ret;
@@ -843,55 +836,55 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_G_ODR_With_Mode(float Odr, LSM6DSR_GYRO_
 
   switch (Mode)
   {
-    case LSM6DSR_GYRO_HIGH_PERFORMANCE_MODE:
-    {
-      /* We must uncheck Low Power bit if it is enabled */
-      lsm6dsr_ctrl7_g_t val;
+  case LSM6DSR_GYRO_HIGH_PERFORMANCE_MODE:
+  {
+    /* We must uncheck Low Power bit if it is enabled */
+    lsm6dsr_ctrl7_g_t val;
 
-      if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    {
+      return LSM6DSR_ERROR;
+    }
+
+    if (val.g_hm_mode != 0U)
+    {
+      val.g_hm_mode = 0U;
+      if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
       {
         return LSM6DSR_ERROR;
       }
-
-      if (val.g_hm_mode != 0U)
-      {
-        val.g_hm_mode = 0U;
-        if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
-        {
-          return LSM6DSR_ERROR;
-        }
-      }
-      break;
     }
-    case LSM6DSR_GYRO_LOW_POWER_NORMAL_MODE:
-    {
-      /* We must check the Low Power bit if it is unchecked */
-      lsm6dsr_ctrl7_g_t val;
+    break;
+  }
+  case LSM6DSR_GYRO_LOW_POWER_NORMAL_MODE:
+  {
+    /* We must check the Low Power bit if it is unchecked */
+    lsm6dsr_ctrl7_g_t val;
 
-      if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    if (lsm6dsr_read_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
+    {
+      return LSM6DSR_ERROR;
+    }
+
+    if (val.g_hm_mode == 0U)
+    {
+      val.g_hm_mode = 1U;
+      if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
       {
         return LSM6DSR_ERROR;
       }
-
-      if (val.g_hm_mode == 0U)
-      {
-        val.g_hm_mode = 1U;
-        if (lsm6dsr_write_reg(&reg_ctx, LSM6DSR_CTRL7_G, (uint8_t *)&val, 1) != LSM6DSR_OK)
-        {
-          return LSM6DSR_ERROR;
-        }
-      }
-
-      /* Now we need to limit the ODR to 208 Hz if it is higher */
-      if (newOdr > 208.0f)
-      {
-        newOdr = 208.0f;
-      }
-      break;
     }
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+
+    /* Now we need to limit the ODR to 208 Hz if it is higher */
+    if (newOdr > 208.0f)
+    {
+      newOdr = 208.0f;
+    }
+    break;
+  }
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
   if (ret == LSM6DSR_ERROR)
@@ -920,16 +913,16 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_G_ODR_When_Enabled(float Odr)
 {
   lsm6dsr_odr_g_t new_odr;
 
-  new_odr = (Odr <=   12.5f) ? LSM6DSR_GY_ODR_12Hz5
-          : (Odr <=   26.0f) ? LSM6DSR_GY_ODR_26Hz
-          : (Odr <=   52.0f) ? LSM6DSR_GY_ODR_52Hz
-          : (Odr <=  104.0f) ? LSM6DSR_GY_ODR_104Hz
-          : (Odr <=  208.0f) ? LSM6DSR_GY_ODR_208Hz
-          : (Odr <=  417.0f) ? LSM6DSR_GY_ODR_417Hz
-          : (Odr <=  833.0f) ? LSM6DSR_GY_ODR_833Hz
-          : (Odr <= 1667.0f) ? LSM6DSR_GY_ODR_1667Hz
-          : (Odr <= 3333.0f) ? LSM6DSR_GY_ODR_3333Hz
-          :                    LSM6DSR_GY_ODR_6667Hz;
+  new_odr = (Odr <= 12.5f)     ? LSM6DSR_GY_ODR_12Hz5
+            : (Odr <= 26.0f)   ? LSM6DSR_GY_ODR_26Hz
+            : (Odr <= 52.0f)   ? LSM6DSR_GY_ODR_52Hz
+            : (Odr <= 104.0f)  ? LSM6DSR_GY_ODR_104Hz
+            : (Odr <= 208.0f)  ? LSM6DSR_GY_ODR_208Hz
+            : (Odr <= 417.0f)  ? LSM6DSR_GY_ODR_417Hz
+            : (Odr <= 833.0f)  ? LSM6DSR_GY_ODR_833Hz
+            : (Odr <= 1667.0f) ? LSM6DSR_GY_ODR_1667Hz
+            : (Odr <= 3333.0f) ? LSM6DSR_GY_ODR_3333Hz
+                               : LSM6DSR_GY_ODR_6667Hz;
 
   /* Output data rate selection. */
   if (lsm6dsr_gy_data_rate_set(&reg_ctx, new_odr) != LSM6DSR_OK)
@@ -947,27 +940,26 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_G_ODR_When_Enabled(float Odr)
  */
 LSM6DSRStatusTypeDef LSM6DSRSensor::Set_G_ODR_When_Disabled(float Odr)
 {
-  gyro_odr = (Odr <=   12.5f) ? LSM6DSR_GY_ODR_12Hz5
-           : (Odr <=   26.0f) ? LSM6DSR_GY_ODR_26Hz
-           : (Odr <=   52.0f) ? LSM6DSR_GY_ODR_52Hz
-           : (Odr <=  104.0f) ? LSM6DSR_GY_ODR_104Hz
-           : (Odr <=  208.0f) ? LSM6DSR_GY_ODR_208Hz
-           : (Odr <=  417.0f) ? LSM6DSR_GY_ODR_417Hz
-           : (Odr <=  833.0f) ? LSM6DSR_GY_ODR_833Hz
-           : (Odr <= 1667.0f) ? LSM6DSR_GY_ODR_1667Hz
-           : (Odr <= 3333.0f) ? LSM6DSR_GY_ODR_3333Hz
-           :                    LSM6DSR_GY_ODR_6667Hz;
+  gyro_odr = (Odr <= 12.5f)     ? LSM6DSR_GY_ODR_12Hz5
+             : (Odr <= 26.0f)   ? LSM6DSR_GY_ODR_26Hz
+             : (Odr <= 52.0f)   ? LSM6DSR_GY_ODR_52Hz
+             : (Odr <= 104.0f)  ? LSM6DSR_GY_ODR_104Hz
+             : (Odr <= 208.0f)  ? LSM6DSR_GY_ODR_208Hz
+             : (Odr <= 417.0f)  ? LSM6DSR_GY_ODR_417Hz
+             : (Odr <= 833.0f)  ? LSM6DSR_GY_ODR_833Hz
+             : (Odr <= 1667.0f) ? LSM6DSR_GY_ODR_1667Hz
+             : (Odr <= 3333.0f) ? LSM6DSR_GY_ODR_3333Hz
+                                : LSM6DSR_GY_ODR_6667Hz;
 
   return LSM6DSR_OK;
 }
-
 
 /**
  * @brief  Get the LSM6DSR gyroscope sensor full scale
  * @param  FullScale pointer where the full scale is written
  * @retval 0 in case of success, an error code otherwise
  */
-LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_FS(int32_t  *FullScale)
+LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_FS(int32_t *FullScale)
 {
   LSM6DSRStatusTypeDef ret = LSM6DSR_OK;
   lsm6dsr_fs_g_t fs_low_level;
@@ -980,33 +972,33 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_FS(int32_t  *FullScale)
 
   switch (fs_low_level)
   {
-    case LSM6DSR_125dps:
-      *FullScale =  125;
-      break;
+  case LSM6DSR_125dps:
+    *FullScale = 125;
+    break;
 
-    case LSM6DSR_250dps:
-      *FullScale =  250;
-      break;
+  case LSM6DSR_250dps:
+    *FullScale = 250;
+    break;
 
-    case LSM6DSR_500dps:
-      *FullScale =  500;
-      break;
+  case LSM6DSR_500dps:
+    *FullScale = 500;
+    break;
 
-    case LSM6DSR_1000dps:
-      *FullScale = 1000;
-      break;
+  case LSM6DSR_1000dps:
+    *FullScale = 1000;
+    break;
 
-    case LSM6DSR_2000dps:
-      *FullScale = 2000;
-      break;
+  case LSM6DSR_2000dps:
+    *FullScale = 2000;
+    break;
 
-    case LSM6DSR_4000dps:
-      *FullScale = 4000;
-      break;
+  case LSM6DSR_4000dps:
+    *FullScale = 4000;
+    break;
 
-    default:
-      ret = LSM6DSR_ERROR;
-      break;
+  default:
+    ret = LSM6DSR_ERROR;
+    break;
   }
 
   return ret;
@@ -1021,12 +1013,12 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Set_G_FS(int32_t FullScale)
 {
   lsm6dsr_fs_g_t new_fs;
 
-  new_fs = (FullScale <= 125)  ? LSM6DSR_125dps
-         : (FullScale <= 250)  ? LSM6DSR_250dps
-         : (FullScale <= 500)  ? LSM6DSR_500dps
-         : (FullScale <= 1000) ? LSM6DSR_1000dps
-         : (FullScale <= 2000) ? LSM6DSR_2000dps
-         :                       LSM6DSR_4000dps;
+  new_fs = (FullScale <= 125)    ? LSM6DSR_125dps
+           : (FullScale <= 250)  ? LSM6DSR_250dps
+           : (FullScale <= 500)  ? LSM6DSR_500dps
+           : (FullScale <= 1000) ? LSM6DSR_1000dps
+           : (FullScale <= 2000) ? LSM6DSR_2000dps
+                                 : LSM6DSR_4000dps;
 
   if (lsm6dsr_gy_full_scale_set(&reg_ctx, new_fs) != LSM6DSR_OK)
   {
@@ -1059,7 +1051,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_AxesRaw(int16_t *Value)
   return LSM6DSR_OK;
 }
 
-
 /**
  * @brief  Get the LSM6DSR gyroscope sensor axes
  * @param  AngularRate pointer where the values of the axes are written
@@ -1090,7 +1081,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_Axes(int32_t *AngularRate)
   return LSM6DSR_OK;
 }
 
-
 /**
  * @brief  Get the LSM6DSR GYRO data ready bit value
  * @param  Status the status of data ready bit
@@ -1105,7 +1095,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Get_G_DRDY_Status(uint8_t *Status)
 
   return LSM6DSR_OK;
 }
-
 
 /**
  * @brief  Get the LSM6DSR register value
@@ -1123,7 +1112,6 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Read_Reg(uint8_t Reg, uint8_t *Data)
   return LSM6DSR_OK;
 }
 
-
 /**
  * @brief  Set the LSM6DSR register value
  * @param  Reg address to be written
@@ -1140,12 +1128,10 @@ LSM6DSRStatusTypeDef LSM6DSRSensor::Write_Reg(uint8_t Reg, uint8_t Data)
   return LSM6DSR_OK;
 }
 
-
 int32_t LSM6DSR_io_write(void *handle, uint8_t WriteAddr, uint8_t *pBuffer, uint16_t nBytesToWrite)
 {
   return ((LSM6DSRSensor *)handle)->IO_Write(pBuffer, WriteAddr, nBytesToWrite);
 }
-
 
 int32_t LSM6DSR_io_read(void *handle, uint8_t ReadAddr, uint8_t *pBuffer, uint16_t nBytesToRead)
 {
